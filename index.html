@@ -1,0 +1,17 @@
+<html>
+  <head><title>Faction Chooser</title></head>
+  <body>
+    <span id="faction">?</span><br>
+    <button id="button">Random</button>
+    <script>
+      var factions = [
+        "Robots", "Zombies", "Pirates", "Aliens", "Dinosaurs", "Tricksters", "Wizards", "Ninjas",
+        "Plants", "Steam Punks", "Ghosts", "Bear Calvary",
+        "Elder Things", "Miskatonic University", "Innsmouth", "Cthulhu Cultists",
+      ];
+      document.getElementById("button").addEventListener("click", function() {
+        document.getElementById("faction").innerHTML = factions[Math.floor(Math.random() * factions.length)];
+      });
+    </script>
+  </body>
+</html>
