@@ -7,18 +7,28 @@ var included = {};
 factions.forEach(function(faction) {
   included[faction] = true;
 });
+var chosen = {};
 var originalFactionCount = factions.length;
 loadState();
-document.getElementById("button").addEventListener("click", function() {
-  var chooseFrom = factions.filter(function(faction) { return included[faction]; });
+
+document.getElementById("generate").addEventListener("click", function() {
+  var chooseFrom = factions.filter(function(faction) { return included[faction] && !chosen[faction]; });
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
   document.getElementById("faction").innerHTML = faction;
+  chosen[faction] = true;
+  generateList();
 });
+document.getElementById("start_over").addEventListener("click", function() {
+  chosen = {};
+  document.getElementById("faction").innerHTML = "?";
+  generateList();
+});
+
 generateList();
 function generateList() {
   document.getElementById("faction_list").innerHTML = factions.map(function(faction, i) {
     return '<li>' +
-      '<label>' +
+      '<label'+(chosen[faction]?' class="chosen"':'')+'>' +
         '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
           faction +
         '</label>' +
@@ -44,6 +54,7 @@ function generateList() {
   });
   saveState();
 }
+
 var newFactionTextbox = document.getElementById("new_faction");
 newFactionTextbox.addEventListener("keydown", function(event) {
   if (event.keyCode === 13) {
@@ -66,6 +77,7 @@ function addNewFaction() {
   }
   newFactionTextbox.focus();
 };
+
 function saveState() {
   localStorage.factions = JSON.stringify({
     factions: factions,
