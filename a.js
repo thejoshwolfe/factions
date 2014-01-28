@@ -3,25 +3,63 @@ var factions = [
   "Plants", "Steam Punks", "Ghosts", "Bear Calvary",
   "Elder Things", "Miskatonic University", "Innsmouth", "Cthulhu Cultists",
 ];
-var included = factions.map(function() { return true; });
+var included = {};
+factions.forEach(function(faction) {
+  included[faction] = true;
+});
+var originalFactionCount = factions.length;
 document.getElementById("button").addEventListener("click", function() {
-  var indexes = included.map(function(_, i) { return i; }).filter(function(i) { return included[i]; });
-  var index = indexes[Math.floor(Math.random() * indexes.length)];
-  document.getElementById("faction").innerHTML = factions[index];
+  var chooseFrom = factions.filter(function(faction) { return included[faction]; });
+  var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
+  document.getElementById("faction").innerHTML = faction;
 });
 generateList();
 function generateList() {
   document.getElementById("faction_list").innerHTML = factions.map(function(faction, i) {
-    return '<li><label><input type="checkbox" id="faction_'+i+'" checked="'+included[i]+'">'+faction+'</label></li>';
+    return '<li>' +
+      '<label>' +
+        '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
+          faction +
+        '</label>' +
+      (i >= originalFactionCount ? '<button id="remove_faction_'+i+'">x</button>' : '') +
+    '</li>';
   }).join("");
-  factions.forEach(function(_, i) {
+  factions.forEach(function(faction, i) {
     var checkbox = document.getElementById("faction_" + i);
     checkbox.addEventListener("click", function() {
       // wait for the value to change
       setTimeout(function() {
-        included[i] = checkbox.checked;
-        console.log(factions[i] + " is now " + included[i]);
+        included[faction] = checkbox.checked;
       }, 0);
     });
+    if (i >= originalFactionCount) {
+      document.getElementById("remove_faction_" + i).addEventListener("click", function() {
+        factions.splice(i, 1);
+        delete included[faction];
+        generateList();
+      });
+    }
   });
 }
+var newFactionTextbox = document.getElementById("new_faction");
+newFactionTextbox.addEventListener("keydown", function(event) {
+  if (event.keyCode === 13) {
+    // Enter
+    addNewFaction();
+  }
+  if (event.keyCode === 27) {
+    // Escape
+    newFactionTextbox.value = "";
+  }
+});
+document.getElementById("add_new_faction").addEventListener("click", addNewFaction);
+function addNewFaction() {
+  var text = newFactionTextbox.value.trim();
+  if (text !== "" && factions.indexOf(text) === -1) {
+    factions.push(text);
+    included[text] = true;
+    generateList();
+    newFactionTextbox.value = "";
+  }
+  newFactionTextbox.focus();
+};
