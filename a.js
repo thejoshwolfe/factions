@@ -65,6 +65,17 @@ newFactionTextbox.addEventListener("keydown", function(event) {
     // Escape
     newFactionTextbox.value = "";
   }
+  var flag = false;
+  for (x in factions)
+  {
+    if (factions[x].toLowerCase() === (newFactionTextbox.value + String.fromCharCode(event.keyCode)).toLowerCase())
+    {
+      flag = true;
+      console.log("should disable");
+      break;
+    }
+  };
+  document.getElementById("add_new_faction").disabled = flag;
 });
 document.getElementById("add_new_faction").addEventListener("click", addNewFaction);
 function addNewFaction() {
