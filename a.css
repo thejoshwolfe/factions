@@ -1,6 +1,30 @@
 li {
   list-style: none;
 }
-.chosen {
+.chosen1 {
   background-color: #afa;
+}
+.chosen2 {
+  background-color: #0CEB86;
+}
+.chosen3 {
+  background-color: #EB0CC9;
+}
+.chosen4 {
+  background-color: #EB0C31;
+}
+.chosen5 {
+  background-color: #0C95EB;
+}
+.chosen6 {
+  background-color: #CDEB0C;
+}
+.chosen7 {
+  background-color: #713AE8;
+}
+span#number_of_players {
+  border-style:solid;
+  border-width: 2px;
+  padding-right: 4px;
+  padding-left: 4px;
 }
