@@ -123,7 +123,9 @@ function generateList() {
       }).join("") +
     '</tr>' +
     factions.map(function(faction, i) {
-      return '<tr'+(isChosen(faction)?' class="chosen"':'')+'>' +
+      return '<tr class="'+(
+          isChosen(faction)?'chosen':
+          !isIncluded(faction)?'ignored':'')+ '">' +
         '<td>' +
           '<label>' +
             '<input type="checkbox" id="faction_'+i+'">' +

@@ -4,6 +4,9 @@ li {
 .chosen {
   background-color: #afa;
 }
+.ignored {
+  background-color: #aaa;
+}
 table {
   border-collapse: collapse;
 }
