@@ -34,9 +34,9 @@ var factionTable = [
 ];
 
 var factions;
-var included;
 var sortOrder;
-var nextSortKey;
+var nextChosenKey;
+var nextIgnoredKey;
 function reset() {
   factions = factionTable.map(function(row) {
     var faction = {};
@@ -45,42 +45,50 @@ function reset() {
     });
     return faction;
   });
-  included = {};
-  factions.forEach(function(faction, i) {
-    included[faction.name] = true;
-  });
   startOver();
 }
 function startOver() {
   sortOrder = {};
-  factionTable.forEach(function(row, i) {
-    sortOrder[row[columnNames.indexOf("name")]] = i;
-  });
-  nextSortKey = -1;
-  document.getElementById("faction").innerHTML = "?";
+  factions.forEach(resetDefaultSortKey);
+  nextChosenKey = -1;
+  nextIgnoredKey = factionTable.length;
+}
+function resetDefaultSortKey(faction) {
+  var nameColumnIndex = columnNames.indexOf("name");
+  for (var i = 0; i < factionTable.length; i++) {
+    var row = factionTable[i];
+    var factionName = row[nameColumnIndex]
+    if (factionName !== faction.name) continue;
+    sortOrder[factionName] = i;
+    break;
+  }
 }
 reset();
+
+// enable the reset button before trying to load the state
+document.getElementById("reset_everything").addEventListener("click", function() {
+  reset();
+  saveState();
+  generateList();
+});
 loadState();
 
 function isChosen(faction) {
   return sortOrder[faction.name] < 0;
 }
+function isIncluded(faction) {
+  return sortOrder[faction.name] < factionTable.length;
+}
 document.getElementById("generate").addEventListener("click", function() {
   var chooseFrom = factions.filter(function(faction) {
-    return included[faction.name] && !isChosen(faction);
+    return isIncluded(faction) && !isChosen(faction);
   });
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
-  document.getElementById("faction").innerHTML = faction.name;
-  sortOrder[faction.name] = nextSortKey--;
+  sortOrder[faction.name] = nextChosenKey--;
   generateList();
 });
 document.getElementById("start_over").addEventListener("click", function() {
   startOver();
-  generateList();
-});
-document.getElementById("reset_everything").addEventListener("click", function() {
-  reset();
-  saveState();
   generateList();
 });
 
@@ -118,19 +126,23 @@ function generateList() {
     }).join("");
   factions.forEach(function(faction, i) {
     var checkbox = document.getElementById("faction_" + i);
-    if (included[faction.name]) {
+    if (isIncluded(faction)) {
       checkbox.setAttribute("checked", "true");
     }
     checkbox.addEventListener("click", function() {
       // wait for the value to change
       setTimeout(function() {
-        included[faction.name] = checkbox.checked;
+        if (checkbox.checked) {
+          resetDefaultSortKey(faction);
+        } else {
+          sortOrder[faction.name] = nextIgnoredKey++;
+        }
         saveState();
+        generateList();
       }, 0);
     });
     document.getElementById("remove_faction_" + i).addEventListener("click", function() {
       factions.splice(i, 1);
-      delete included[faction.name];
       generateList();
     });
   });
@@ -140,7 +152,7 @@ function generateList() {
 function saveState() {
   localStorage.factions = JSON.stringify({
     factions: factions,
-    included: included,
+    sortOrder: sortOrder,
   });
 }
 function loadState() {
@@ -148,5 +160,5 @@ function loadState() {
   if (stateJson == null) return;
   var state = JSON.parse(stateJson);
   factions = state.factions;
-  included = state.included;
+  sortOrder = state.sortOrder;
 }
