@@ -165,13 +165,13 @@ function generateList() {
 }
 
 function saveState() {
-  localStorage.factions = JSON.stringify({
+  localStorage.factions2 = JSON.stringify({
     factions: factions,
     sortOrder: sortOrder,
   });
 }
 function loadState() {
-  var stateJson = localStorage.factions;
+  var stateJson = localStorage.factions2;
   if (stateJson == null) return;
   var state = JSON.parse(stateJson);
   factions = state.factions;
