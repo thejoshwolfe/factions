@@ -38,6 +38,7 @@ var sortOrder;
 var nextChosenKey;
 var nextIgnoredKey;
 function reset() {
+  // restore deleted factions
   factions = factionTable.map(function(row) {
     var faction = {};
     columnNames.forEach(function(columnName, i) {
@@ -45,13 +46,22 @@ function reset() {
     });
     return faction;
   });
+
+  // recheck everything
+  sortOrder = {};
+  factions.forEach(resetDefaultSortKey);
+  nextIgnoredKey = factionTable.length;
+
   startOver();
 }
 function startOver() {
-  sortOrder = {};
-  factions.forEach(resetDefaultSortKey);
+  // unchoose everything
+  factions.forEach(function(faction) {
+    if (isChosen(faction)) {
+      resetDefaultSortKey(faction);
+    }
+  });
   nextChosenKey = -1;
-  nextIgnoredKey = factionTable.length;
 }
 function resetDefaultSortKey(faction) {
   var nameColumnIndex = columnNames.indexOf("name");
@@ -77,12 +87,15 @@ function isChosen(faction) {
   return sortOrder[faction.name] < 0;
 }
 function isIncluded(faction) {
-  return sortOrder[faction.name] < factionTable.length;
+  var sortKey = sortOrder[faction.name];
+  if (sortKey == null) return true; // during reset
+  return sortKey < factionTable.length;
 }
 document.getElementById("generate").addEventListener("click", function() {
   var chooseFrom = factions.filter(function(faction) {
     return isIncluded(faction) && !isChosen(faction);
   });
+  if (chooseFrom.length === 0) return;
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
   sortOrder[faction.name] = nextChosenKey--;
   generateList();
