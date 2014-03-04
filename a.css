@@ -4,3 +4,18 @@ li {
 .chosen {
   background-color: #afa;
 }
+table {
+  border-collapse: collapse;
+}
+td {
+  padding: 0px;
+  margin: 0px;
+}
+th {
+  padding-left: 3px;
+  padding-right: 3px;
+  margin: 0px;
+}
+.centered {
+  text-align: center;
+}

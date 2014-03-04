@@ -76,17 +76,37 @@ document.getElementById("reset_everything").addEventListener("click", function()
 
 generateList();
 function generateList() {
-  document.getElementById("faction_list").innerHTML = factions.map(function(faction, i) {
-    return '<li>' +
-      '<label'+(chosen[faction.name]?' class="chosen"':'')+'>' +
-        '<input type="checkbox" id="faction_'+i+'"'+(included[faction.name]?' checked="true"':'')+'>' +
-          faction.name +
-        '</label>' +
-      '<button id="remove_faction_'+i+'">x</button>' +
-    '</li>';
-  }).join("");
+  document.getElementById("faction_table").innerHTML = '' +
+    '<tr>' +
+      columnNames.map(function(columnName) {
+        var result = '<th>' + columnName + '</th>';
+        if (columnName === "name") {
+          // delete button
+          result += '<th></th>';
+        }
+        return result;
+      }).join("") +
+    '</tr>' +
+    factions.map(function(faction, i) {
+      return '<tr'+(chosen[faction.name]?' class="chosen"':'')+'>' +
+        '<td>' +
+          '<label>' +
+            '<input type="checkbox" id="faction_'+i+'">' +
+            faction.name +
+          '</label>' +
+        '</td>' +
+        '<td><button id="remove_faction_'+i+'">x</button></td>' +
+        columnNames.map(function(columnName) {
+          if (columnName === "name") return "";
+          return '<td class="centered">' + faction[columnName] + '</td>';
+        }).join("") +
+      '</tr>';
+    }).join("");
   factions.forEach(function(faction, i) {
     var checkbox = document.getElementById("faction_" + i);
+    if (included[faction.name]) {
+      checkbox.setAttribute("checked", "true");
+    }
     checkbox.addEventListener("click", function() {
       // wait for the value to change
       setTimeout(function() {
