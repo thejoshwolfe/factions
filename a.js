@@ -35,7 +35,8 @@ var factionTable = [
 
 var factions;
 var included;
-var chosen;
+var sortOrder;
+var nextSortKey;
 function reset() {
   factions = factionTable.map(function(row) {
     var faction = {};
@@ -45,37 +46,50 @@ function reset() {
     return faction;
   });
   included = {};
-  factions.forEach(function(faction) {
+  factions.forEach(function(faction, i) {
     included[faction.name] = true;
   });
-  chosen = {};
+  startOver();
+}
+function startOver() {
+  sortOrder = {};
+  factionTable.forEach(function(row, i) {
+    sortOrder[row[columnNames.indexOf("name")]] = i;
+  });
+  nextSortKey = -1;
+  document.getElementById("faction").innerHTML = "?";
 }
 reset();
 loadState();
 
+function isChosen(faction) {
+  return sortOrder[faction.name] < 0;
+}
 document.getElementById("generate").addEventListener("click", function() {
   var chooseFrom = factions.filter(function(faction) {
-    return included[faction.name] && !chosen[faction.name];
+    return included[faction.name] && !isChosen(faction);
   });
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
   document.getElementById("faction").innerHTML = faction.name;
-  chosen[faction.name] = true;
+  sortOrder[faction.name] = nextSortKey--;
   generateList();
 });
 document.getElementById("start_over").addEventListener("click", function() {
-  chosen = {};
-  document.getElementById("faction").innerHTML = "?";
+  startOver();
   generateList();
 });
 document.getElementById("reset_everything").addEventListener("click", function() {
   reset();
-  document.getElementById("faction").innerHTML = "?";
   saveState();
   generateList();
 });
 
+
 generateList();
 function generateList() {
+  factions.sort(function(a, b) {
+    return sortOrder[a.name] - sortOrder[b.name];
+  });
   document.getElementById("faction_table").innerHTML = '' +
     '<tr>' +
       columnNames.map(function(columnName) {
@@ -88,7 +102,7 @@ function generateList() {
       }).join("") +
     '</tr>' +
     factions.map(function(faction, i) {
-      return '<tr'+(chosen[faction.name]?' class="chosen"':'')+'>' +
+      return '<tr'+(isChosen(faction)?' class="chosen"':'')+'>' +
         '<td>' +
           '<label>' +
             '<input type="checkbox" id="faction_'+i+'">' +
