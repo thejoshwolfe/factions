@@ -34,12 +34,15 @@ var chosen = {};
   var request = new XMLHttpRequest();
   request.onreadystatechange = handleResponse;
   request.open("GET", "../factions.json");
-  request.send();
+  try {request.send();}catch(e){}
 
   function handleResponse() {
     if (request.readyState !== 4) return;
-    if (request.status !== 200) alert("json request failure: " + request.status);
-    loadFactionsObject(JSON.parse(request.responseText));
+    if (request.status === 200) {
+	  loadFactionsObject(JSON.parse(request.responseText));
+	} else {
+	  alert("json request failure: " + request.status);
+	}
     loadFactionsObject(customFactions);
     loadState();
     generateList();

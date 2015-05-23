@@ -1,10 +1,18 @@
-ul {
+ul, #faction {
   max-height: 999999px;
+  font-size: 26pt;
 }
 li {
   list-style: none;
-  font-size: 16px;
+}
+input[type="checkbox"] {
+  width: 2em;
+  height: 2em;
 }
 .chosen {
   background-color: #afa;
+}
+.bigButton {
+  width: 48%;
+  font-size: 2em;
 }
