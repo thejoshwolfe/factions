@@ -2,7 +2,6 @@ var factions = [];
 var expansionToFactions = {};
 var included = {};
 var chosen = {};
-var originalFactionCount;
 (function() {
   var request = new XMLHttpRequest();
   request.onreadystatechange = handleResponse;
@@ -12,7 +11,38 @@ var originalFactionCount;
   function handleResponse() {
     if (request.readyState !== 4) return;
     if (request.status !== 200) alert("json request failure: " + request.status);
-    var factionsObject = JSON.parse(request.responseText);
+    loadFactionsObject(JSON.parse(request.responseText));
+    loadFactionsObject({
+      "Josh's Awesome Factions": {
+        "Demons": {},
+        "Giants": {},
+        "Sea Creatures": {}
+      },
+      "Josh's LOLWUT Factions": {
+        "Bureaucrats": {},
+        "Celestial Bodies": {},
+        "College of Engineering": {},
+        "Minimalists": {},
+        "Pathogens": {}
+      },
+      "Josh Offends Everyone": {
+        "Christians": {},
+        "Nazis": {},
+        "Porn Stars": {},
+        "Special Eds": {},
+        "Women": {}
+      },
+      "James Blows Your Mind": {
+        "Red Fortress 2": {},
+        "Blu Fortress 2": {},
+        "Pok\u00e9mon": {},
+        "Cowboys": {}
+      }
+    });
+    loadState();
+    generateList();
+  }
+  function loadFactionsObject(factionsObject) {
     for (var expansionName in factionsObject) {
       expansionToFactions[expansionName] = Object.keys(factionsObject[expansionName]);
       Array.prototype.push.apply(factions, Object.keys(factionsObject[expansionName]));
@@ -20,9 +50,6 @@ var originalFactionCount;
     factions.forEach(function(faction) {
       included[faction] = true;
     });
-    originalFactionCount = factions.length;
-    loadState();
-    generateList();
   }
 })();
 
@@ -48,9 +75,8 @@ function generateList() {
         return '<li>' +
           '<label'+(chosen[faction]?' class="chosen"':'')+'>' +
             '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
-              faction +
-            '</label>' +
-          (i >= originalFactionCount ? '<button id="remove_faction_'+i+'">x</button>' : '') +
+            faction +
+          '</label>' +
         '</li>';
       }).join("") +
     '</ul>';
@@ -93,39 +119,9 @@ function generateList() {
         }, 0);
       });
     }
-    if (i >= originalFactionCount) {
-      document.getElementById("remove_faction_" + i).addEventListener("click", function() {
-        factions.splice(i, 1);
-        delete included[faction];
-        generateList();
-      });
-    }
   });
   saveState();
 }
-
-var newFactionTextbox = document.getElementById("new_faction");
-newFactionTextbox.addEventListener("keydown", function(event) {
-  if (event.keyCode === 13) {
-    // Enter
-    addNewFaction();
-  }
-  if (event.keyCode === 27) {
-    // Escape
-    newFactionTextbox.value = "";
-  }
-});
-document.getElementById("add_new_faction").addEventListener("click", addNewFaction);
-function addNewFaction() {
-  var text = newFactionTextbox.value.trim();
-  if (text !== "" && factions.indexOf(text) === -1) {
-    factions.push(text);
-    included[text] = true;
-    generateList();
-    newFactionTextbox.value = "";
-  }
-  newFactionTextbox.focus();
-};
 
 function saveState() {
   localStorage.factions = JSON.stringify({
