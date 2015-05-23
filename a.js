@@ -39,10 +39,10 @@ var chosen = {};
   function handleResponse() {
     if (request.readyState !== 4) return;
     if (request.status === 200) {
-	  loadFactionsObject(JSON.parse(request.responseText));
-	} else {
-	  alert("json request failure: " + request.status);
-	}
+      loadFactionsObject(JSON.parse(request.responseText));
+    } else {
+      alert("json request failure: " + request.status);
+    }
     loadFactionsObject(customFactions);
     loadState();
     generateList();
