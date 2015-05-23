@@ -1,3 +1,31 @@
+var customFactions = {
+  "Josh's Awesome Factions": {
+    "Demons": {},
+    "Giants": {},
+    "Sea Creatures": {}
+  },
+  "Josh's LOLWUT Factions": {
+    "Bureaucrats": {},
+    "Celestial Bodies": {},
+    "College of Engineering": {},
+    "Minimalists": {},
+    "Pathogens": {}
+  },
+  "Josh Offends Everyone": {
+    "Christians": {},
+    "Nazis": {},
+    "Porn Stars": {},
+    "Special Eds": {},
+    "Women": {}
+  },
+  "James Blows Your Mind": {
+    "Red Fortress 2": {},
+    "Blu Fortress 2": {},
+    "Pok\u00e9mon": {},
+    "Cowboys": {}
+  }
+};
+
 var factions = [];
 var expansionToFactions = {};
 var included = {};
@@ -12,33 +40,7 @@ var chosen = {};
     if (request.readyState !== 4) return;
     if (request.status !== 200) alert("json request failure: " + request.status);
     loadFactionsObject(JSON.parse(request.responseText));
-    loadFactionsObject({
-      "Josh's Awesome Factions": {
-        "Demons": {},
-        "Giants": {},
-        "Sea Creatures": {}
-      },
-      "Josh's LOLWUT Factions": {
-        "Bureaucrats": {},
-        "Celestial Bodies": {},
-        "College of Engineering": {},
-        "Minimalists": {},
-        "Pathogens": {}
-      },
-      "Josh Offends Everyone": {
-        "Christians": {},
-        "Nazis": {},
-        "Porn Stars": {},
-        "Special Eds": {},
-        "Women": {}
-      },
-      "James Blows Your Mind": {
-        "Red Fortress 2": {},
-        "Blu Fortress 2": {},
-        "Pok\u00e9mon": {},
-        "Cowboys": {}
-      }
-    });
+    loadFactionsObject(customFactions);
     loadState();
     generateList();
   }
@@ -136,3 +138,8 @@ function loadState() {
   factions = state.factions;
   included = state.included;
 }
+
+document.getElementById("resetButton").addEventListener("click", function() {
+  delete localStorage.factions;
+  location.href = location.href;
+});
