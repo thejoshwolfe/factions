@@ -12,9 +12,10 @@ input[type="checkbox"] {
   width: 2.2em;
   height: 2.2em;
 }
-.chosen {
-  background-color: #afa;
-}
+.chosen1 { background-color: #afa; }
+.chosen2 { background-color: #abf; }
+.chosen3 { background-color: #faa; }
+.chosen4 { background-color: #ff4; }
 .bigButton {
   width: 48%;
   font-size: 3em;

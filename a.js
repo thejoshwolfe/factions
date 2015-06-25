@@ -30,6 +30,13 @@ var factions = [];
 var expansionToFactions = {};
 var included = {};
 var chosen = {};
+var colors = [
+  "chosen1",
+  "chosen2",
+  "chosen3",
+  "chosen4",
+];
+var colorIndex = 0;
 (function() {
   var request = new XMLHttpRequest();
   request.onreadystatechange = handleResponse;
@@ -41,7 +48,7 @@ var chosen = {};
     if (request.status === 200) {
       loadFactionsObject(JSON.parse(request.responseText));
     } else {
-      alert("json request failure: " + request.status);
+      //alert("json request failure: " + request.status);
     }
     loadFactionsObject(customFactions);
     loadState();
@@ -62,13 +69,17 @@ document.getElementById("generate").addEventListener("click", function() {
   var chooseFrom = factions.filter(function(faction) { return included[faction] && !chosen[faction]; });
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
   document.getElementById("faction").innerHTML = faction;
-  chosen[faction] = true;
+  chosen[faction] = colors[colorIndex];
   generateList();
 });
 document.getElementById("start_over").addEventListener("click", function() {
   chosen = {};
+  colorIndex = 0;
   document.getElementById("faction").innerHTML = "?";
   generateList();
+});
+document.getElementById("change_color").addEventListener("click", function() {
+  colorIndex = (colorIndex + 1) % colors.length;
 });
 
 function generateList() {
@@ -77,8 +88,13 @@ function generateList() {
     var subList = '<ul>' +
       expansionToFactions[expansionName].map(function(faction) {
         i++;
+        var class_ = "";
+        if (chosen[faction] != null) {
+          class_ = ' class="' + chosen[faction] + '"';
+          console.log(class_);
+        }
         return '<li>' +
-          '<label'+(chosen[faction]?' class="chosen"':'')+'>' +
+          '<label' + class_ + '>' +
             '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
             faction +
           '</label>' +
