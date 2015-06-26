@@ -87,6 +87,16 @@ document.getElementById("change_color").addEventListener("click", function() {
   colorIndex = (colorIndex + 1) % colors.length;
   renderPlayerName();
 });
+document.getElementById("selectAllButton").addEventListener("click", function() {
+  factions.forEach(function(faction) {
+    included[faction] = true;
+  });
+  generateList();
+});
+document.getElementById("unselectAllButton").addEventListener("click", function() {
+  included = {};
+  generateList();
+});
 
 function renderPlayerName() {
   var playerNameSpan = document.getElementById("player_name");
