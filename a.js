@@ -76,11 +76,19 @@ document.getElementById("start_over").addEventListener("click", function() {
   chosen = {};
   colorIndex = 0;
   document.getElementById("faction").innerHTML = "?";
+  renderPlayerName();
   generateList();
 });
 document.getElementById("change_color").addEventListener("click", function() {
   colorIndex = (colorIndex + 1) % colors.length;
+  renderPlayerName();
 });
+
+function renderPlayerName() {
+  var playerNameSpan = document.getElementById("player_name");
+  playerNameSpan.textContent = "Player " + (colorIndex + 1);
+  playerNameSpan.className = colors[colorIndex];
+}
 
 function generateList() {
   var i = -1;
