@@ -48,7 +48,11 @@ var colorIndex = 0;
     if (request.status === 200) {
       loadFactionsObject(JSON.parse(request.responseText));
     } else {
-      //alert("json request failure: " + request.status);
+      // failed to load
+      if (location.protocol !== "file:") {
+        // there's no excuse outside a file: url
+        alert("json request failure: " + request.status);
+      }
     }
     loadFactionsObject(customFactions);
     loadState();
@@ -99,7 +103,6 @@ function generateList() {
         var class_ = "";
         if (chosen[faction] != null) {
           class_ = ' class="' + chosen[faction] + '"';
-          console.log(class_);
         }
         return '<li>' +
           '<label' + class_ + '>' +
