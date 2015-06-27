@@ -27,9 +27,11 @@ var customFactions = {
 };
 
 var factions = [];
+var shouldShowFactions = false;
 var expansionToFactions = {};
 var included = {};
 var chosen = {};
+var resultsHtmlChildren = [];
 var colors = [
   "chosen1",
   "chosen2",
@@ -68,24 +70,36 @@ var colorIndex = 0;
     });
   }
 })();
-
+function setCurrentChoice(faction) {
+  document.getElementById("choiceSpan").textContent = faction;
+}
 document.getElementById("generate").addEventListener("click", function() {
   var chooseFrom = factions.filter(function(faction) { return included[faction] && !chosen[faction]; });
   var faction = chooseFrom[Math.floor(Math.random() * chooseFrom.length)];
-  document.getElementById("faction").innerHTML = faction;
   chosen[faction] = colors[colorIndex];
+  setCurrentChoice(faction);
+  var child = '<li class="' + colors[colorIndex] + '">' + faction + '</li>';
+  resultsHtmlChildren.unshift(child);
+  document.getElementById("resultsList").innerHTML = resultsHtmlChildren.join("");
   generateList();
 });
 document.getElementById("start_over").addEventListener("click", function() {
   chosen = {};
   colorIndex = 0;
-  document.getElementById("faction").innerHTML = "?";
+  resultsHtmlChildren = [];
+  document.getElementById("resultsList").innerHTML = "";
   renderPlayerName();
+  setCurrentChoice("?");
   generateList();
 });
 document.getElementById("change_color").addEventListener("click", function() {
   colorIndex = (colorIndex + 1) % colors.length;
+  setCurrentChoice("?");
   renderPlayerName();
+});
+document.getElementById("showHideFactions").addEventListener("click", function() {
+  shouldShowFactions = !shouldShowFactions;
+  generateList();
 });
 document.getElementById("selectAllButton").addEventListener("click", function() {
   factions.forEach(function(faction) {
@@ -162,6 +176,8 @@ function generateList() {
       });
     }
   });
+  document.getElementById("hideFactionDiv").style.display = shouldShowFactions ? "block" : "none";
+  document.getElementById("showHideFactions").value = shouldShowFactions ? "Hide" : "Show";
   saveState();
 }
 
@@ -169,6 +185,7 @@ function saveState() {
   localStorage.factions = JSON.stringify({
     factions: factions,
     included: included,
+    showFactions: shouldShowFactions,
   });
 }
 function loadState() {
@@ -177,6 +194,7 @@ function loadState() {
   var state = JSON.parse(stateJson);
   factions = state.factions;
   included = state.included;
+  shouldShowFactions = state.showFactions;
 }
 
 document.getElementById("resetButton").addEventListener("click", function() {
