@@ -113,9 +113,7 @@ document.getElementById("unselectAllButton").addEventListener("click", function(
 });
 
 function renderPlayerName() {
-  var playerNameSpan = document.getElementById("player_name");
-  playerNameSpan.textContent = "Player " + (colorIndex + 1);
-  playerNameSpan.className = colors[colorIndex];
+  document.getElementById("change_color").className = "bigButton " + colors[colorIndex];
 }
 
 function generateList() {
