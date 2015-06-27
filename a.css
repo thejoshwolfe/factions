@@ -1,6 +1,10 @@
 body {
   width: 720px;
 }
+div {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 ul, #faction {
   max-height: 999999px;
   font-size: 36pt;
