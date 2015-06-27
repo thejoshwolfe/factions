@@ -174,6 +174,11 @@ function generateList() {
       });
     }
   });
+  var includedCount = 0;
+  factions.forEach(function(faction) {
+    if (included[faction]) includedCount += 1;
+  });
+  document.getElementById("factionFraction").textContent = "Using " + includedCount + "/" + factions.length + " Factions";
   document.getElementById("hideFactionDiv").style.display = shouldShowFactions ? "block" : "none";
   document.getElementById("showHideFactions").value = shouldShowFactions ? "Hide" : "Show";
   saveState();
