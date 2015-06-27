@@ -79,7 +79,7 @@ document.getElementById("generate").addEventListener("click", function() {
   chosen[faction] = colors[colorIndex];
   setCurrentChoice(faction);
   var child = '<li class="' + colors[colorIndex] + '">' + faction + '</li>';
-  resultsHtmlChildren.unshift(child);
+  resultsHtmlChildren.push(child);
   document.getElementById("resultsList").innerHTML = resultsHtmlChildren.join("");
   generateList();
 });
