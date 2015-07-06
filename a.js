@@ -1,30 +1,39 @@
-var customFactions = {
-  "Josh's Awesome Factions": {
-    "Demons": {},
-    "Giants": {},
-    "Sea Creatures": {}
+var customFactions = [
+  {
+    name: "Josh's Awesome Factions",
+    factions: [
+      {name: "Demons"},
+      {name: "Giants"},
+      {name: "Sea Creatures"},
+    ],
+  }, {
+    name: "Josh's LOLWUT Factions",
+    factions: [
+      {name: "Bureaucrats"},
+      {name: "Celestial Bodies"},
+      {name: "College of Engineering"},
+      {name: "Minimalists"},
+      {name: "Pathogens"},
+    ],
+  }, {
+    name: "Josh Offends Everyone",
+    factions: [
+      {name: "Christians"},
+      {name: "Nazis"},
+      {name: "Porn Stars"},
+      {name: "Special Eds"},
+      {name: "Women"},
+    ],
+  }, {
+    name: "James Blows Your Mind",
+    factions: [
+      {name: "Red Fortress 2"},
+      {name: "Blu Fortress 2"},
+      {name: "Pok\u00e9mon"},
+      {name: "Cowboys"},
+    ],
   },
-  "Josh's LOLWUT Factions": {
-    "Bureaucrats": {},
-    "Celestial Bodies": {},
-    "College of Engineering": {},
-    "Minimalists": {},
-    "Pathogens": {}
-  },
-  "Josh Offends Everyone": {
-    "Christians": {},
-    "Nazis": {},
-    "Porn Stars": {},
-    "Special Eds": {},
-    "Women": {}
-  },
-  "James Blows Your Mind": {
-    "Red Fortress 2": {},
-    "Blu Fortress 2": {},
-    "Pok\u00e9mon": {},
-    "Cowboys": {}
-  }
-};
+];
 
 var factions = [];
 var shouldShowFactions = false;
@@ -60,11 +69,14 @@ var colorIndex = 0;
     loadState();
     generateList();
   }
-  function loadFactionsObject(factionsObject) {
-    for (var expansionName in factionsObject) {
-      expansionToFactions[expansionName] = Object.keys(factionsObject[expansionName]);
-      Array.prototype.push.apply(factions, Object.keys(factionsObject[expansionName]));
-    }
+  function loadFactionsObject(database) {
+    database.forEach(function(expansion) {
+      var factionList = expansion.factions.map(function(faction) {
+        return faction.name;
+      });
+      expansionToFactions[expansion.name] = factionList;
+      Array.prototype.push.apply(factions, factionList);
+    });
     factions.forEach(function(faction) {
       included[faction] = true;
     });
