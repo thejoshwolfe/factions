@@ -1,3 +1,8 @@
+document.getElementById("resetButton").addEventListener("click", function() {
+  delete localStorage.factions;
+  location.href = location.href;
+});
+
 var exampleJson = '' +
   '[\n' +
   '  {\n' +
@@ -269,8 +274,3 @@ function loadState() {
   shouldShowCustom = state.showCustom;
   return true;
 }
-
-document.getElementById("resetButton").addEventListener("click", function() {
-  delete localStorage.factions;
-  location.href = location.href;
-});
