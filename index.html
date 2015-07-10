@@ -21,10 +21,24 @@
       <ul id="faction_list"></ul>
       <input type="button" id="selectAllButton" value="Selecet All" class="bigButton">
       <input type="button" id="unselectAllButton" value="Unselect All" class="bigButton" style="float:right;">
+      <br>
+      <span class="bigButton">Custom Factions</span>
+      <input type="button" id="showHideCustom" class="mediumButton" value="Show">
+      <div id="hideCustomDiv" style="width:100%; display:none;">
+        upload JSON file:
+        <input id="customFileInput" type="file" multiple>
+        <br>
+        <textarea id="customPasteInput" placeholder="Paste JSON data here" style="width:100%;" rows=20></textarea>
+        <input id="showExampleButton" type="button" value="Show Example">
+        <input id="submitCustom" type="button" value="Submit" style="float: right;">
+        <br>
+        (This entire web app is static html/javascript. Nobody can see anything you do here but you.)
+      </div>
     </div>
     <div style="width:100%;">
       <input type="button" id="resetButton" value="Reset Everything" class="bigButton" style="width:100%;">
     </div>
+    This project on Github: <a href="https://github.com/thejoshwolfe/factions">thejoshwolfe/factions</a>
     <script src="a.js"></script>
   </body>
 </html>

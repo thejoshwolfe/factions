@@ -1,42 +1,26 @@
-var customFactions = [
-  {
-    name: "Josh's Awesome Factions",
-    factions: [
-      {name: "Demons"},
-      {name: "Giants"},
-      {name: "Sea Creatures"},
-    ],
-  }, {
-    name: "Josh's LOLWUT Factions",
-    factions: [
-      {name: "Bureaucrats"},
-      {name: "Celestial Bodies"},
-      {name: "College of Engineering"},
-      {name: "Minimalists"},
-      {name: "Pathogens"},
-    ],
-  }, {
-    name: "Josh Offends Everyone",
-    factions: [
-      {name: "Christians"},
-      {name: "Nazis"},
-      {name: "Porn Stars"},
-      {name: "Special Eds"},
-      {name: "Women"},
-    ],
-  }, {
-    name: "James Blows Your Mind",
-    factions: [
-      {name: "Red Fortress 2"},
-      {name: "Blu Fortress 2"},
-      {name: "Pok\u00e9mon"},
-      {name: "Cowboys"},
-    ],
-  },
-];
+var exampleJson = '' +
+  '[\n' +
+  '  {\n' +
+  '    "name": "My Own Expansion",\n' +
+  '    "factions": [\n' +
+  '      {"name": "Faction 1"},\n' +
+  '      {"name": "Faction 2"},\n' +
+  '      {"name": "Faction 3"}\n' +
+  '    ]\n' +
+  '  }, {\n' +
+  '    "name": "Some Other Expansion",\n' +
+  '    "factions": [\n' +
+  '      {"name": "Other Faction 1"},\n' +
+  '      {"name": "Other Faction 2"},\n' +
+  '      {"name": "Other Faction 3"}\n' +
+  '    ]\n' +
+  '  }\n' +
+  ']\n';
 
+var allSets = [];
 var factions = [];
 var shouldShowFactions = false;
+var shouldShowCustom = false;
 var expansionToFactions = {};
 var included = {};
 var chosen = {};
@@ -49,6 +33,10 @@ var colors = [
 ];
 var colorIndex = 0;
 (function() {
+  if (loadState()) {
+    generateList();
+    return;
+  }
   var request = new XMLHttpRequest();
   request.onreadystatechange = handleResponse;
   request.open("GET", "../factions.json");
@@ -57,7 +45,7 @@ var colorIndex = 0;
   function handleResponse() {
     if (request.readyState !== 4) return;
     if (request.status === 200) {
-      loadFactionsObject(JSON.parse(request.responseText));
+      loadSetsObject(JSON.parse(request.responseText));
     } else {
       // failed to load
       if (location.protocol !== "file:") {
@@ -65,23 +53,27 @@ var colorIndex = 0;
         alert("json request failure: " + request.status);
       }
     }
-    loadFactionsObject(customFactions);
-    loadState();
     generateList();
   }
-  function loadFactionsObject(database) {
-    database.forEach(function(expansion) {
-      var factionList = expansion.factions.map(function(faction) {
-        return faction.name;
-      });
-      expansionToFactions[expansion.name] = factionList;
-      Array.prototype.push.apply(factions, factionList);
-    });
-    factions.forEach(function(faction) {
-      included[faction] = true;
-    });
-  }
 })();
+function loadSetsObject(setsObject) {
+  Array.prototype.push.apply(allSets, setsObject);
+  saveState();
+
+  factions = [];
+  expansionToFactions = {};
+  allSets.forEach(function(expansion) {
+    var factionList = expansion.factions.map(function(faction) {
+      return faction.name;
+    });
+    expansionToFactions[expansion.name] = factionList;
+    Array.prototype.push.apply(factions, factionList);
+  });
+  included = {};
+  factions.forEach(function(faction) {
+    included[faction] = true;
+  });
+}
 function setCurrentChoice(faction) {
   document.getElementById("choiceSpan").textContent = faction;
 }
@@ -124,6 +116,48 @@ document.getElementById("unselectAllButton").addEventListener("click", function(
   generateList();
 });
 
+document.getElementById("showHideCustom").addEventListener("click", function() {
+  shouldShowCustom = !shouldShowCustom;
+  generateList();
+});
+document.getElementById("customFileInput").addEventListener("change", function() {
+  var files = document.getElementById("customFileInput").files;
+  var setsObjects = [];
+  Array.prototype.slice.call(files).forEach(function(file, i) {
+    var fileReader = new FileReader();
+    fileReader.onload = onLoad;
+    fileReader.readAsText(file);
+    function onLoad() {
+      try {
+        var setsObject = JSON.parse(fileReader.result);
+      } catch (e) {
+        return alert(e);
+      }
+      setsObjects[i] = setsObject;
+      if (setsObjects.filter(function(x) { return x == null; }).length === 0) done();
+    }
+  });
+  function done() {
+    setsObjects.forEach(function(setsObject) {
+      loadSetsObject(setsObject);
+    });
+    generateList();
+  }
+});
+document.getElementById("showExampleButton").addEventListener("click", function() {
+  document.getElementById("customPasteInput").value = exampleJson;
+});
+document.getElementById("submitCustom").addEventListener("click", function() {
+  var jsonString = document.getElementById("customPasteInput").value;
+  try {
+    var jsonObject = JSON.parse(jsonString);
+  } catch (e) {
+    alert(e);
+  }
+  loadSetsObject(jsonObject);
+  generateList();
+});
+
 function renderPlayerName() {
   document.getElementById("change_color").className = "bigButton " + colors[colorIndex];
 }
@@ -141,15 +175,15 @@ function generateList() {
         return '<li>' +
           '<label' + class_ + '>' +
             '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
-            faction +
+            sanitizeHtml(faction) +
           '</label>' +
         '</li>';
       }).join("") +
     '</ul>';
     return '<li>' +
       '<label>' +
-        '<input type="checkbox" id="group_'+i+'" data-expansion-name="' + expansionName + '">' +
-        expansionName +
+        '<input type="checkbox" id="group_'+i+'" data-expansion-name="' + sanitizeAttribute(expansionName) + '">' +
+        sanitizeHtml(expansionName) +
       '</label>' +
       subList +
     '</li>';
@@ -160,7 +194,7 @@ function generateList() {
     checkbox.addEventListener("click", function() {
       // wait for the value to change
       setTimeout(function() {
-        included[faction] = checkbox.checked;
+        setOrDelete(included, faction, checkbox.checked);
         generateList();
         saveState();
       }, 0);
@@ -178,7 +212,7 @@ function generateList() {
           var state = groupCheckbox.checked;
           var expansionName = groupCheckbox.getAttribute("data-expansion-name");
           expansionToFactions[expansionName].forEach(function(faction) {
-            included[faction] = state;
+            setOrDelete(included, faction, state);
           });
           generateList();
           saveState();
@@ -193,23 +227,47 @@ function generateList() {
   document.getElementById("factionFraction").textContent = "Using " + includedCount + "/" + factions.length + " Factions";
   document.getElementById("hideFactionDiv").style.display = shouldShowFactions ? "block" : "none";
   document.getElementById("showHideFactions").value = shouldShowFactions ? "Hide" : "Show";
+
+  document.getElementById("hideCustomDiv").style.display = shouldShowCustom ? "block" : "none";
+  document.getElementById("showHideCustom").value = shouldShowCustom ? "Hide" : "Show";
   saveState();
+}
+function setOrDelete(dict, faction, value) {
+  if (value) {
+    dict[faction] = true;
+  } else {
+    delete dict[faction];
+  }
+}
+
+function sanitizeHtml(text) {
+  text = text.replace("&", "&amp;");
+  text = text.replace("<", "&gt;");
+  return text;
+}
+function sanitizeAttribute(text) {
+  text = text.replace("&", "&amp;");
+  text = text.replace('"', "&quot;");
+  return text;
 }
 
 function saveState() {
   localStorage.factions = JSON.stringify({
-    factions: factions,
+    allSets: allSets,
     included: included,
     showFactions: shouldShowFactions,
+    showCustom: shouldShowCustom,
   });
 }
 function loadState() {
   var stateJson = localStorage.factions;
-  if (stateJson == null) return;
+  if (stateJson == null) return false;
   var state = JSON.parse(stateJson);
-  factions = state.factions;
+  loadSetsObject(state.allSets);
   included = state.included;
   shouldShowFactions = state.showFactions;
+  shouldShowCustom = state.showCustom;
+  return true;
 }
 
 document.getElementById("resetButton").addEventListener("click", function() {
