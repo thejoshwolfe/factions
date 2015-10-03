@@ -23,10 +23,11 @@ var exampleJson = '' +
   ']\n';
 
 var allSets = [];
+var expansions = [];
 var factions = [];
 var shouldShowFactions = false;
 var shouldShowCustom = false;
-var expansionToFactions = {};
+var factionToExpansion = {};
 var included = {};
 var chosen = {};
 var resultsHtmlChildren = [];
@@ -44,13 +45,33 @@ var colorIndex = 0;
   }
   var request = new XMLHttpRequest();
   request.onreadystatechange = handleResponse;
-  request.open("GET", "../factions.json");
+  request.open("GET", "factions.json");
   try {request.send();}catch(e){}
 
   function handleResponse() {
     if (request.readyState !== 4) return;
     if (request.status === 200) {
-      loadSetsObject(JSON.parse(request.responseText));
+      var officialExpansions = JSON.parse(request.responseText);
+
+      // delete Munchkin's Monsters and Treasures
+      (function() {
+        for (var i = 0; i < officialExpansions.length; i++) {
+          var expansionObject = officialExpansions[i];
+          if (expansionObject.name !== "Smash Up: Munchkin") continue;
+          for (var i = 0; i < expansionObject.factions.length; i++) {
+            var factionObject = expansionObject.factions[i];
+            if (factionObject.name === "Monsters" || factionObject.name === "Treasures") {
+              // in-place remove
+              expansionObject.factions.splice(i, 1);
+              i--;
+            }
+          }
+          return;
+        }
+        // no smashup munchkin
+      })();
+
+      loadSetsObject(officialExpansions);
     } else {
       // failed to load
       if (location.protocol !== "file:") {
@@ -63,16 +84,24 @@ var colorIndex = 0;
 })();
 function loadSetsObject(setsObject) {
   Array.prototype.push.apply(allSets, setsObject);
+  allSetsChanged();
   saveState();
-
+}
+function allSetsChanged() {
+  expansions = [];
   factions = [];
-  expansionToFactions = {};
-  allSets.forEach(function(expansion) {
-    var factionList = expansion.factions.map(function(faction) {
-      return faction.name;
+  factionToExpansion = {};
+  allSets.forEach(function(expansionObject) {
+    var expansion = expansionObject.name;
+    var anyFactionsHere = false;
+    expansionObject.factions.forEach(function(factionObject) {
+      var faction = factionObject.name;
+      if (factionToExpansion[faction] != null) return; // duplicate
+      factionToExpansion[faction] = expansion;
+      factions.push(faction);
+      anyFactionsHere = true;
     });
-    expansionToFactions[expansion.name] = factionList;
-    Array.prototype.push.apply(factions, factionList);
+    if (anyFactionsHere) expansions.push(expansion);
   });
   included = {};
   factions.forEach(function(faction) {
@@ -169,30 +198,33 @@ function renderPlayerName() {
 
 function generateList() {
   var i = -1;
-  document.getElementById("faction_list").innerHTML = Object.keys(expansionToFactions).map(function(expansionName) {
-    var subList = '<ul>' +
-      expansionToFactions[expansionName].map(function(faction) {
-        i++;
-        var class_ = "";
-        if (chosen[faction] != null) {
-          class_ = ' class="' + chosen[faction] + '"';
-        }
-        return '<li>' +
-          '<label' + class_ + '>' +
-            '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
-            sanitizeHtml(faction) +
-          '</label>' +
-        '</li>';
-      }).join("") +
-    '</ul>';
-    return '<li>' +
-      '<label>' +
-        '<input type="checkbox" id="group_'+i+'" data-expansion-name="' + sanitizeAttribute(expansionName) + '">' +
-        sanitizeHtml(expansionName) +
-      '</label>' +
-      subList +
-    '</li>';
-  }).join("");
+  document.getElementById("faction_list").innerHTML = (function() {
+    return allSets.map(function(expansionObject) {
+      var subList = '<ul>' +
+        expansionObject.factions.map(function(factionObject) {
+          var faction = factionObject.name;
+          i++;
+          var class_ = "";
+          if (chosen[faction] != null) {
+            class_ = ' class="' + chosen[faction] + '"';
+          }
+          return '<li>' +
+            '<label' + class_ + '>' +
+              '<input type="checkbox" id="faction_'+i+'"'+(included[faction]?' checked="true"':'')+'>' +
+              sanitizeHtml(faction) +
+            '</label>' +
+          '</li>';
+        }).join("") +
+      '</ul>';
+      return '<li>' +
+        '<label>' +
+          '<input type="checkbox" id="group_'+i+'" data-expansion-name="' + sanitizeAttribute(expansionObject.name) + '">' +
+          sanitizeHtml(expansionObject.name) +
+        '</label>' +
+        subList +
+      '</li>';
+    }).join("");
+  })();
   var allFactionsState = null;
   factions.forEach(function(faction, i) {
     var checkbox = document.getElementById("faction_" + i);
@@ -216,8 +248,14 @@ function generateList() {
         setTimeout(function() {
           var state = groupCheckbox.checked;
           var expansionName = groupCheckbox.getAttribute("data-expansion-name");
-          expansionToFactions[expansionName].forEach(function(faction) {
-            setOrDelete(included, faction, state);
+          var expansion = (function() {
+            for (var i = 0; i < allSets.length; i++) {
+              if (allSets[i].name === expansionName) return allSets[i];
+            }
+            throw null;
+          })();
+          expansion.factions.forEach(function(factionObject) {
+            setOrDelete(included, factionObject.name, state);
           });
           generateList();
           saveState();
@@ -268,7 +306,8 @@ function loadState() {
   var stateJson = localStorage.factions;
   if (stateJson == null) return false;
   var state = JSON.parse(stateJson);
-  loadSetsObject(state.allSets);
+  allSets = state.allSets;
+  allSetsChanged();
   included = state.included;
   shouldShowFactions = state.showFactions;
   shouldShowCustom = state.showCustom;
