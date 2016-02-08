@@ -170,7 +170,7 @@
           {"name":"Spectre"           ,"count":1,"type":"Minion","power":5,"ability":"Special: If you have 2 or fewer cards in you hand, any time you can play a minion, you can play this card from you discard pile instead."},
           {"name":"Haunting"          ,"count":2,"type":"Minion","power":3,"ability":"Ongoing: If you have two or fewer cards in your hand, this minion has +3 power and is not affected by other players' cards."},
           {"name":"Spirit"            ,"count":3,"type":"Minion","power":3,"ability":"Choose a minion. You may discard cards equal to its power to destroy it."},
-          {"name":"Ghost"             ,"count":4,"type":"Minion","power":2,"ability":"You may discard a card from you hand."},
+          {"name":"Ghost"             ,"count":4,"type":"Minion","power":2,"ability":"You may discard a card from your hand."},
           {"name":"Across the Divide" ,"count":1,"type":"Action","ability":"Choose a card name. Place any number of minions with that name from your discard pile into your hand."},
           {"name":"Door to the Beyond","count":1,"type":"Action","ability":"Play on a base. Ongoing: If you have two or fewer cards in your hand, each of your minions here has +2 power."},
           {"name":"Ghostly Arrival"   ,"count":2,"type":"Action","ability":"You may play an extra minion and/or extra action."},
