@@ -813,20 +813,20 @@
           {"name":"Crystal Fortress"     ,"count":1,"type":"Base","rewards":[3, 1, 1],"breakpoint":19,"ability":"After you play a minion here, you may place a minion from your discard pile on the bottom of your deck."}
         ]
       },
-      { "name": "Tornadoes",
+      { "name": "Tornados",
         "cards": [
           {"name":"Monster Tornado"   ,"count":1,"type":"Minion","power":5,"ability":"Talent: Move a minion of power 4 or less from here to another base, or from another base to here."},
           {"name":"Cyclone"           ,"count":2,"type":"Minion","power":4,"ability":"Talent: Move this minion to another base."},
           {"name":"Twister"           ,"count":3,"type":"Minion","power":3,"ability":"You may move a minion of power 3 or less from here to another base, or from another base to here."},
           {"name":"Dust Devil"        ,"count":4,"type":"Minion","power":2,"ability":"Special: Before a base scores, you may move this minion to there."},
+          {"name":"Carried Away"      ,"count":2,"type":"Action","ability":"Move a minion to another base."},
+          {"name":"Gone with the Wind","count":1,"type":"Action","ability":"Special: Play after a base scores. You may move one of your minions from there to another base instead of the discard pile."},
           {"name":"Not in Kansas"     ,"count":1,"type":"Action","ability":"Destroy a base and any actions played on it or on minions there. Replace it with the top card of the base deck. All minions from the original base remain."},
+          {"name":"Over the Rainbow"  ,"count":1,"type":"Action","ability":"Special: Play before a base scores. Move one of your minions from another base to there."},
           {"name":"Picked Up"         ,"count":1,"type":"Action","ability":"Special: Play before a base scores. Move a minion from there to another base."},
           {"name":"Ripped Off"        ,"count":1,"type":"Action","ability":"Transfer an action played on a base to another base or on a minion to another minion."},
-          {"name":"Over the Rainbow"  ,"count":1,"type":"Action","ability":"Special: Play before a base scores. Move one of your minions from another base to there."},
           {"name":"Trade Winds"       ,"count":2,"type":"Action","ability":"Choose two minions of power 3 or less. Move each one to the other's base."},
           {"name":"Whirlwinds"        ,"count":1,"type":"Action","ability":"You may move any number of your minions to other bases."},
-          {"name":"Gone with the Wind","count":1,"type":"Action","ability":"Special: Play after a base scores. You may move one of your minions from there to another base instead of the discard pile."},
-          {"name":"Carried Away"      ,"count":2,"type":"Action","ability":"Move a minion to another base."},
           {"name":"Tornado Alley"     ,"count":1,"type":"Base","rewards":[4, 3, 2],"breakpoint":25,"ability":"After the first time you play a minion here each turn, you may move another minion to here from another base."},
           {"name":"Trailer Park"      ,"count":1,"type":"Base","rewards":[4, 2, 1],"breakpoint":20,"ability":"After you move a minion to here, place a +1 power counter on it."}
         ]
