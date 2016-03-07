@@ -70,7 +70,7 @@
           {"name":"Sea Dogs"     ,"count":1,"type":"Action","ability":"Name a faction. Move all other players' minions of that faction from one base to another."},
           {"name":"Swashbuckling","count":1,"type":"Action","ability":"Each of your minions gains +1 power until the end of the turn."},
           {"name":"The Grey Opal","count":1,"type":"Base","rewards":[3, 1, 1],"breakpoint":17,"ability":"After this base scores, all players other than the winner may move a minion from here to another base instead of the discard pile."},
-          {"name":"Tortuga"      ,"count":1,"type":"Base","rewards":[4, 3, 1],"breakpoint":21,"ability":"The runner up may move one of his or her minions to the base that replaces this base."}
+          {"name":"Tortuga"      ,"count":1,"type":"Base","rewards":[4, 3, 2],"breakpoint":21,"ability":"The runner up may move one of his or her minions to the base that replaces this base."}
         ]
       },
       { "name": "Robots",
@@ -743,11 +743,11 @@
           {"name":"Wyvern"               ,"count":2,"type":"Minion","power":4,"ability":"Destroy a minion here of power 3 or less. Talent: Reduce the breakpoint of this base by 3 until the end of the turn."},
           {"name":"Imperial Dragon"      ,"count":3,"type":"Minion","power":3,"ability":"Ongoing: After another player plays or moves a minion here, draw a card."},
           {"name":"Hatchling"            ,"count":4,"type":"Minion","power":2,"ability":"Ongoing: After another player plays or moves a minion here, it gets -1 power until the end of the turn."},
-          {"name":"Bring down the walls" ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: Before this base scores, you may play a minion there."},
-          {"name":"Burn it down"         ,"count":1,"type":"Action","ability":"Destroy a base and any actions played on it. Replace it with the top card of the base deck or a base from the discard pile. All minions from the original base remain."},
+          {"name":"Bring Down the Walls" ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: Before this base scores, you may play a minion there."},
+          {"name":"Burn It Down"         ,"count":1,"type":"Action","ability":"Destroy a base and any actions played on it. Replace it with the top card of the base deck or a base from the discard pile. All minions from the original base remain."},
           {"name":"Dangerous Ground"     ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Other players must discard a card to play a minion here."},
           {"name":"Dragon Lands"         ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Your minions here have +1 power. Special: Before a base scores, you may play this card there."},
-          {"name":"Intimidating presence","count":1,"type":"Action","ability":"Play on a base. Ongoing: Other players' minions here have -1 power. Special: Before a base scores, you may play this card there."},
+          {"name":"Intimidating Presence","count":1,"type":"Action","ability":"Play on a base. Ongoing: Other players' minions here have -1 power. Special: Before a base scores, you may play this card there."},
           {"name":"Flank Attack"         ,"count":1,"type":"Action","ability":"Search your deck and/or discard pile for an action that can be played on a base and play it as an extra action. Shuffle your deck if you searched it."},
           {"name":"Raze"                 ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: This base's ability is cancelled."},
           {"name":"Ruins"                ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: Other players here are awarded 1 less VP from this base when it scores."},
