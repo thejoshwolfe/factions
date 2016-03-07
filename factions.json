@@ -804,7 +804,7 @@
           {"name":"Expanded Power"       ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: This minion has +1 power and can't be destroyed by other players."},
           {"name":"Golden Age"           ,"count":2,"type":"Action","ability":"Place up to three minions from your discard pile on the bottom of your deck."},
           {"name":"Justice Friends"      ,"count":2,"type":"Action","ability":"Each of your minions of power 5 or more gains +2 power until the end of the turn."},
-          {"name":"My only weakness"     ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: This minion's abilities are cancelled."},
+          {"name":"My Only Weakness"     ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: This minion's abilities are cancelled."},
           {"name":"Not Really Dead"      ,"count":2,"type":"Action","ability":"Place up to two minions of power 2 or less from your discard pile into your hand."},
           {"name":"Radioactive Exposure" ,"count":1,"type":"Action","ability":"Destroy one of your minions to search your deck for a minion with more power, play it here as an extra minion, and shuffle your deck."},
           {"name":"Secret Base"          ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Your minions here of power 3 or less cannot be destroyed by other players."},
