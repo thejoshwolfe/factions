@@ -734,5 +734,103 @@
         ]
       }
     ]
+  },
+  { "name": "Smash Up: It's Your Fault",
+    "factions": [
+      { "name": "Dragons",
+        "cards": [
+          {"name":"Great Wyrm"           ,"count":1,"type":"Minion","power":5,"ability":"Ongoing: Other players here are awarded 1 less VP from this base when it scores."},
+          {"name":"Wyvern"               ,"count":2,"type":"Minion","power":4,"ability":"Destroy a minion here of power 3 or less. Talent: Reduce the breakpoint of this base by 3 until the end of the turn."},
+          {"name":"Imperial Dragon"      ,"count":3,"type":"Minion","power":3,"ability":"Ongoing: After another player plays or moves a minion here, draw a card."},
+          {"name":"Hatchling"            ,"count":4,"type":"Minion","power":2,"ability":"Ongoing: After another player plays or moves a minion here, it gets -1 power until the end of the turn."},
+          {"name":"Bring down the walls" ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: Before this base scores, you may play a minion there."},
+          {"name":"Burn it down"         ,"count":1,"type":"Action","ability":"Destroy a base and any actions played on it. Replace it with the top card of the base deck or a base from the discard pile. All minions from the original base remain."},
+          {"name":"Dangerous Ground"     ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Other players must discard a card to play a minion here."},
+          {"name":"Dragon Lands"         ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Your minions here have +1 power. Special: Before a base scores, you may play this card there."},
+          {"name":"Intimidating presence","count":1,"type":"Action","ability":"Play on a base. Ongoing: Other players' minions here have -1 power. Special: Before a base scores, you may play this card there."},
+          {"name":"Flank Attack"         ,"count":1,"type":"Action","ability":"Search your deck and/or discard pile for an action that can be played on a base and play it as an extra action. Shuffle your deck if you searched it."},
+          {"name":"Raze"                 ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: This base's ability is cancelled."},
+          {"name":"Ruins"                ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: Other players here are awarded 1 less VP from this base when it scores."},
+          {"name":"Dragon's Lair"        ,"count":1,"type":"Base","rewards":[2, 2, 1],"breakpoint":18,"ability":"The winner draws 3 cards."},
+          {"name":"Wyrm's Desolation"    ,"count":1,"type":"Base","rewards":[5, 3, 2],"breakpoint":20,"ability":"Each minion here has -1 power."}
+        ]
+      },
+      { "name": "Mythic Greeks",
+        "cards": [
+          {"name":"Odysseus"          ,"count":1,"type":"Minion","power":5,"ability":"Ongoing: After you play an action, place a +1 power counter on one of your minions."},
+          {"name":"Heracles"          ,"count":1,"type":"Minion","power":4,"ability":"Ongoing: After any plays an action, this minion gains +1 power until the end of the turn."},
+          {"name":"Jason"             ,"count":1,"type":"Minion","power":4,"ability":"Ongoing: After the first time you play an action each turn, choose a base. All of your minions there gain +1 power until the end of the turn."},
+          {"name":"Spartan"           ,"count":3,"type":"Minion","power":3,"ability":"Ongoing: Place a +1 power counter on this minion after the first time you play an action on your turn."},
+          {"name":"Argonaut"          ,"count":4,"type":"Minion","power":2,"ability":"Trigger all abilities that would trigger from playing an action. Special: Any time you can play an action, you can play this card instead."},
+          {"name":"Favor of Aphrodite","count":1,"type":"Action","ability":"Play an extra minion."},
+          {"name":"Favor of Apollo"   ,"count":1,"type":"Action","ability":"Draw a card and play an extra action."},
+          {"name":"Favor of Ares"     ,"count":1,"type":"Action","ability":"One of your minions gains +3 power until the end of the turn."},
+          {"name":"Favor of Athena"   ,"count":1,"type":"Action","ability":"Reveal the top 5 cards of your deck. You may place one of the revealed actions into your hand, and return the rest to the top of your deck in any order."},
+          {"name":"Favor of Dionysus" ,"count":1,"type":"Action","ability":"One of your minions gains +1 power until the end of the turn. Play an extra action. You may place this card on top of your deck instead of the discard pile."},
+          {"name":"Favor of Hades"    ,"count":1,"type":"Action","ability":"Place an action card from your discard pile into your hand."},
+          {"name":"Favor of Hera"     ,"count":1,"type":"Action","ability":"Place a +1 power counter on up to two of your minions."},
+          {"name":"Favor of Hermes"   ,"count":1,"type":"Action","ability":"Play two extra actions."},
+          {"name":"Favor of Poseidon" ,"count":1,"type":"Action","ability":"Shuffle up to three cards from your discard pile into your deck."},
+          {"name":"Favor of Zeus"     ,"count":1,"type":"Action","ability":"Reduce the breakpoint of a base by 5 until the end of the turn."},
+          {"name":"Oracle at Delphi"  ,"count":1,"type":"Base","rewards":[4, 2, 1],"breakpoint":18,"ability":"After you play a minion here, reveal the top card of your deck. If it is an action, draw it; otherwise return it."},
+          {"name":"Wooden Horse"      ,"count":1,"type":"Base","rewards":[3, 2, 1],"breakpoint":21,"ability":"After any player plays an action, he or she may give a minion here +2 power until the end of the turn."}
+        ]
+      },
+      { "name": "Sharks",
+        "cards": [
+          {"name":"Megalodon"          ,"count":1,"type":"Minion","power":5,"ability":"You may destroy a minion of power 4 or less here. Special: Before this base scores, you may destroy a minion here of power 3 or less."},
+          {"name":"Great White"        ,"count":2,"type":"Minion","power":4,"ability":"Talent: Move this minion to another base and destroy a minion there of power 2 or less."},
+          {"name":"Hammerhead"         ,"count":3,"type":"Minion","power":3,"ability":"Ongoing: After a minion here is destroyed, place a +1 power counter on this minion."},
+          {"name":"Mako"               ,"count":4,"type":"Minion","power":2,"ability":"Special: After you destroy a minion on any base, you may play this minion there as an extra minion."},
+          {"name":"Air Jaws"           ,"count":1,"type":"Action","ability":"Move one of your minions to another base, then destroy a minion there of power 3 or less."},
+          {"name":"Blood in the Water" ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: After a minion is destroyed here, you may play a minion here of power 3 or less as an extra minion."},
+          {"name":"Chum"               ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: After a minion is destroyed, place a +1 power counter on this minion."},
+          {"name":"Dangerous Waters"   ,"count":1,"type":"Action","ability":"Play on a base. Talent: Choose a minion here. It gets -2 power until the end of the turn."},
+          {"name":"Feeding Frenzy"     ,"count":1,"type":"Action","ability":"Choose a base. Destroy any number of minions there of power 2 or less."},
+          {"name":"Freakin' Laser Beam","count":1,"type":"Action","ability":"Choose one of your minions. Destroy a minion with equal or lower power at your minion's base."},
+          {"name":"Torn Apart"         ,"count":1,"type":"Action","ability":"Destroy a minion of power 3 or less and draw a card."},
+          {"name":"Week of Sharks"     ,"count":2,"type":"Action","ability":"Play on a base. Ongoing: If you have a minion here, draw an extra card at the end of your turn. Only use one Week of Sharks ability each turn."},
+          {"name":"Shark Reef"         ,"count":1,"type":"Base","rewards":[4, 2, 1],"breakpoint":20,"ability":"After a minion is destroyed here, the player that destroyed it may place a +1 power counter on one of their minions."},
+          {"name":"The Deep"           ,"count":1,"type":"Base","rewards":[3, 2, 2],"breakpoint":16,"ability":"After you play a minion of power 4 or more here, you may destroy a minion with less power here."}
+        ]
+      },
+      { "name": "Superheroes",
+        "cards": [
+          {"name":"Awesome Guy"          ,"count":1,"type":"Minion","power":5,"ability":"Ongoing: Your minions here cannot be destroyed by other players."},
+          {"name":"The Burst"            ,"count":1,"type":"Minion","power":5,"ability":"Ongoing: After a minion is played on a base, you may move this minion to there."},
+          {"name":"Captain Amazing"      ,"count":1,"type":"Minion","power":5,"ability":"Talent: Give each of your minions here +1 power until the end of the turn."},
+          {"name":"Mind Lady"            ,"count":1,"type":"Minion","power":5,"ability":"Talent: Choose another player's minion. That minion's abilities are cancelled until the start of your next turn."},
+          {"name":"Mild Mannered Citizen","count":5,"type":"Minion","power":2,"ability":"Ongoing: At the start of your turn you may destroy this minion to search your deck for a minion of power 5 or more, play it here as an extra minion, and shuffle your deck."},
+          {"name":"Expanded Power"       ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: This minion has +1 power and can't be destroyed by other players."},
+          {"name":"Golden Age"           ,"count":2,"type":"Action","ability":"Place up to three minions from your discard pile on the bottom of your deck."},
+          {"name":"Justice Friends"      ,"count":2,"type":"Action","ability":"Each of your minions of power 5 or more gains +2 power until the end of the turn."},
+          {"name":"My only weakness"     ,"count":1,"type":"Action","ability":"Play on a minion. Ongoing: This minion's abilities are cancelled."},
+          {"name":"Not Really Dead"      ,"count":2,"type":"Action","ability":"Place up to two minions of power 2 or less from your discard pile into your hand."},
+          {"name":"Radioactive Exposure" ,"count":1,"type":"Action","ability":"Destroy one of your minions to search your deck for a minion with more power, play it here as an extra minion, and shuffle your deck."},
+          {"name":"Secret Base"          ,"count":1,"type":"Action","ability":"Play on a base. Ongoing: Your minions here of power 3 or less cannot be destroyed by other players."},
+          {"name":"Sidekick"             ,"count":1,"type":"Action","ability":"Choose a base where you have a minion of power 5 or more. Play a minion there of power 2 or less as an extra minion."},
+          {"name":"Converted Cave"       ,"count":1,"type":"Base","rewards":[4, 3, 2],"breakpoint":18,"ability":"Minions of power 2 or less cannot be destroyed here except by their controller."},
+          {"name":"Crystal Fortress"     ,"count":1,"type":"Base","rewards":[3, 1, 1],"breakpoint":19,"ability":"After you play a minion here, you may place a minion from your discard pile on the bottom of your deck."}
+        ]
+      },
+      { "name": "Tornadoes",
+        "cards": [
+          {"name":"Monster Tornado"   ,"count":1,"type":"Minion","power":5,"ability":"Talent: Move a minion of power 4 or less from here to another base, or from another base to here."},
+          {"name":"Cyclone"           ,"count":2,"type":"Minion","power":4,"ability":"Talent: Move this minion to another base."},
+          {"name":"Twister"           ,"count":3,"type":"Minion","power":3,"ability":"You may move a minion of power 3 or less from here to another base, or from another base to here."},
+          {"name":"Dust Devil"        ,"count":4,"type":"Minion","power":2,"ability":"Special: Before a base scores, you may move this minion to there."},
+          {"name":"Not in Kansas"     ,"count":1,"type":"Action","ability":"Destroy a base and any actions played on it or on minions there. Replace it with the top card of the base deck. All minions from the original base remain."},
+          {"name":"Picked Up"         ,"count":1,"type":"Action","ability":"Special: Play before a base scores. Move a minion from there to another base."},
+          {"name":"Ripped Off"        ,"count":1,"type":"Action","ability":"Transfer an action played on a base to another base or on a minion to another minion."},
+          {"name":"Over the Rainbow"  ,"count":1,"type":"Action","ability":"Special: Play before a base scores. Move one of your minions from another base to there."},
+          {"name":"Trade Winds"       ,"count":2,"type":"Action","ability":"Choose two minions of power 3 or less. Move each one to the other's base."},
+          {"name":"Whirlwinds"        ,"count":1,"type":"Action","ability":"You may move any number of your minions to other bases."},
+          {"name":"Gone with the Wind","count":1,"type":"Action","ability":"Special: Play after a base scores. You may move one of your minions from there to another base instead of the discard pile."},
+          {"name":"Carried Away"      ,"count":2,"type":"Action","ability":"Move a minion to another base."},
+          {"name":"Tornado Alley"     ,"count":1,"type":"Base","rewards":[4, 3, 2],"breakpoint":25,"ability":"After the first time you play a minion here each turn, you may move another minion to here from another base."},
+          {"name":"Trailer Park"      ,"count":1,"type":"Base","rewards":[4, 2, 1],"breakpoint":20,"ability":"After you move a minion to here, place a +1 power counter on it."}
+        ]
+      }
+    ]
   }
 ]
