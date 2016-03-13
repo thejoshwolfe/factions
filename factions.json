@@ -758,7 +758,7 @@
       { "name": "Mythic Greeks",
         "cards": [
           {"name":"Odysseus"          ,"count":1,"type":"Minion","power":5,"ability":"Ongoing: After you play an action, place a +1 power counter on one of your minions."},
-          {"name":"Heracles"          ,"count":1,"type":"Minion","power":4,"ability":"Ongoing: After any plays an action, this minion gains +1 power until the end of the turn."},
+          {"name":"Heracles"          ,"count":1,"type":"Minion","power":4,"ability":"Ongoing: After any player plays an action, this minion gains +1 power until the end of the turn."},
           {"name":"Jason"             ,"count":1,"type":"Minion","power":4,"ability":"Ongoing: After the first time you play an action each turn, choose a base. All of your minions there gain +1 power until the end of the turn."},
           {"name":"Spartan"           ,"count":3,"type":"Minion","power":3,"ability":"Ongoing: Place a +1 power counter on this minion after the first time you play an action on your turn."},
           {"name":"Argonaut"          ,"count":4,"type":"Minion","power":2,"ability":"Trigger all abilities that would trigger from playing an action. Special: Any time you can play an action, you can play this card instead."},
