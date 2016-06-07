@@ -152,7 +152,7 @@
           {"name":"General Ivan"              ,"count":1,"type":"Minion","power":6,"ability":"Ongoing: Your minions cannot be destroyed."},
           {"name":"Polar Commando"            ,"count":2,"type":"Minion","power":4,"ability":"Ongoing: If this is your only minion on this base, it has +2 power and cannot be destroyed."},
           {"name":"Bear Cavalry"              ,"count":3,"type":"Minion","power":3,"ability":"Move another player's minion from here to another base."},
-          {"name":"Cub Scout"                 ,"count":4,"type":"Minion","power":3,"ability":"Ongoing: After another players minion moves here, if it has less power than this minion, destroy it."},
+          {"name":"Cub Scout"                 ,"count":4,"type":"Minion","power":3,"ability":"Ongoing: After another player's minion moves here, if it has less power than this minion, destroy it."},
           {"name":"Bear Hug"                  ,"count":1,"type":"Action","ability":"Each other player destroys his or her minion with the least power (owner chooses in case of ties)."},
           {"name":"Bear Necessities"          ,"count":1,"type":"Action","ability":"Destroy an action that has been played on a minion or base."},
           {"name":"Bear Rides You"            ,"count":1,"type":"Action","ability":"Move one of your minions to another base."},
