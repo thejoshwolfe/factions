@@ -252,7 +252,7 @@
           {"name":"Sacred Circle"        ,"count":1,"type":"Action","ability":"Play on a base. Talent: You may play an extra minion here with the same name as another minion here."},
           {"name":"Spreading the Word"   ,"count":2,"type":"Action","ability":"Play up to two extra minions with the same name as a minion in play."},
           {"name":"The Deep Ones"        ,"count":2,"type":"Action","ability":"Each of your minions of power 2 or less get +1 power until the end of the turn."},
-          {"name":"Innsmouth"            ,"count":1,"type":"Base","rewards":[5, 3, 2],"breakpoint":25,"ability":"After each time a minion is played here, its owner may place one card from any player's discard pile on the bottom of their deck."},
+          {"name":"Innsmouth"            ,"count":1,"type":"Base","rewards":[5, 3, 2],"breakpoint":23,"ability":"After each time a minion is played here, its owner may place one card from any player's discard pile on the bottom of their deck."},
           {"name":"Ritual Site"          ,"count":1,"type":"Base","rewards":[4, 2, 2],"breakpoint":20,"ability":"After this base scores, all minions on it are shuffled into their owners' decks instead of their discard piles."}
         ]
       },
