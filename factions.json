@@ -832,5 +832,77 @@
         ]
       }
     ]
+  },
+  { "name": "Cease and Desist",
+    "factions": [
+      { "name": "Astroknights" },
+      { "name": "Changerbots" },
+      { "name": "Ignobles" },
+      { "name": "Star Roamers" }
+    ]
+  },
+  { "name": "What were we thinking",
+    "factions": [
+      { "name": "Explorers" },
+      { "name": "Grannies" },
+      { "name": "Rock Stars" },
+      { "name": "Teddy Bears" }
+    ]
+  },
+  { "name": "All Stars Event Kit",
+    "factions": [
+      { "name": "All Stars" }
+    ]
+  },
+  { "name": "Big in Japan",
+    "factions": [
+      { "name": "Itty Critters" },
+      { "name": "Kaiju" },
+      { "name": "Magical Girls" },
+      { "name": "Mega Troopers" }
+    ]
+  },
+  { "name": "Smash Up Sheep Promo",
+    "factions": [
+      { "name": "Sheep" }
+    ]
+  },
+  { "name": "That \u201970s Expansion",
+    "factions": [
+      { "name": "Disco Dancers" },
+      { "name": "Kung Fu Fighters" },
+      { "name": "Truckers" },
+      { "name": "Vigilantes" }
+    ]
+  },
+  { "name": "Oops, You Did It Again",
+    "factions": [
+      { "name": "Ancient Egyptians" },
+      { "name": "Cowboys" },
+      { "name": "Samurai" },
+      { "name": "Vikings" }
+    ]
+  },
+  { "name": "World Tour: International Incident",
+    "factions": [
+      { "name": "Luchadors" },
+      { "name": "Mounties" },
+      { "name": "Musketeers" },
+      { "name": "Sumo Wrestlers" }
+    ]
+  },
+  { "name": "World Tour event Kit",
+    "factions": [
+      { "name": "Penguins" }
+    ]
+  },
+  { "name": "World Tour: Culture Shock",
+    "factions": [
+      { "name": "Anansi Tales" },
+      { "name": "Ancient Incas" },
+      { "name": "Grimms Fairy Tales" },
+      { "name": "Polynesian Voyagers" },
+      { "name": "Russian Fairy Tales" }
+    ]
   }
 ]

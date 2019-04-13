@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import argparse
@@ -33,12 +33,15 @@ def main(input_path, output_path):
       f.write(    '    "factions": [\n')
       for j, faction in enumerate(expansion["factions"]):
         formatting_stats = get_formatting_stats(faction)
-        f.write(  '      { "name": %s,\n' % json.dumps(faction["name"]))
-        f.write(  '        "cards": [\n')
-        for k, card in enumerate(faction["cards"]):
-          f.write('          {%s}%s\n' % (format_card(card, formatting_stats), [",", ""][k == len(faction["cards"]) - 1]))
-        f.write(  '        ]\n')
-        f.write(  '      }%s\n' % [",", ""][j == len(expansion["factions"]) - 1])
+        if "cards" in faction:
+          f.write(  '      { "name": %s,\n' % json.dumps(faction["name"]))
+          f.write(  '        "cards": [\n')
+          for k, card in enumerate(faction["cards"]):
+            f.write('          {%s}%s\n' % (format_card(card, formatting_stats), [",", ""][k == len(faction["cards"]) - 1]))
+          f.write(  '        ]\n')
+          f.write(  '      }%s\n' % [",", ""][j == len(expansion["factions"]) - 1])
+        else:
+          f.write(  '      { "name": %s }%s\n' % (json.dumps(faction["name"]), [",", ""][j == len(expansion["factions"]) - 1]))
       f.write(    '    ]\n')
       f.write(    '  }%s\n' % [",", ""][i == len(allSets) - 1])
     f.write(      ']\n')
@@ -75,6 +78,7 @@ def format_card(card, formatting_stats):
   return ",".join(x for x in parts)
 
 def get_formatting_stats(faction):
+  if "cards" not in faction: return 0
   longest_name = 0
   for card in faction["cards"]:
     name_length = len(json.dumps(card["name"]))
